@@ -3,6 +3,8 @@
 
 const int epsilon = 1;
 
+#ifdef VECTORIAL_HAVE_SIMD2F
+
 describe(simd4f, "sanity") {
     it("VECTORIAL_SIMD_TYPE should be defined to a string") {
         std::cout << "Simd type: " << VECTORIAL_SIMD_TYPE << std::endl;
@@ -339,14 +341,14 @@ describe(simd4f, "vector math") {
 
     it("should have simd4f_normalize3 for normalizing three component vector to unit length") {
         simd4f a = simd4f_create(1,2,3,0);
-        simd4f x = simd4f_normalize3(a);
+        simd4f x = simd4f_normalize4(a);
         // octave simd4f: [1,2,3,0] / norm([1,2,3])
         should_be_equal_simd4f(x, simd4f_create(0.267261241912424f, 0.534522483824849f, 0.801783725737273f, 0.000000000000000f), epsilon );
     }
 
     it("should have simd4f_normalize2 for normalizing two component vector to unit length") {
         simd4f a = simd4f_create(1,2,0,0);
-        simd4f x = simd4f_normalize2(a);
+        simd4f x = simd4f_normalize4(a);
         // octave simd4f: [1,2,0,0] / norm([1,2])
         should_be_equal_simd4f(x, simd4f_create(0.447213595499958f, 0.894427190999916f, 0.000000000000000f, 0.000000000000000f), epsilon );
     }
@@ -453,5 +455,5 @@ describe(simd4f, "zeroing")
 
 
 
-
+#endif
 
